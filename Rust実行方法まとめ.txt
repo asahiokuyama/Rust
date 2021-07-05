@@ -1,0 +1,54 @@
+--rustcを使う方法
+1.rustのディレクトリへ行く
+2.	rustc 作成したコード.rs
+	./main
+で実行できる（一番簡単）
+
+--cargoを使う方法
+1.cargoでプロジェクトを作成する
+$ cargo new hello_cargo --bin
+このコマンドでディレクトリ内に2つのファイルと1つのディレクトリを作成してくれる
+
+2.cargo.tomlを確認する
+[package]
+name = "hello_cargo"
+version = "0.1.0"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+こんな感じになっているはず
+最初の行の[package]は、後の文がパッケージを設定していることを示すセクションヘッダー
+その後の3行が、Cargoがプログラムをコンパイルするのに必要な設定情報をセットします: 名前、バージョン、誰が書いたか
+
+
+3.src/main.rsを開く
+fn main() {
+    println!("Hello, world!");
+}
+
+こうなっているはず
+Cargoは、プロジェクトの体系化の手助けをしてくれる。勝手に書いてくれる。
+
+
+4.buildする
+$ cargo build
+Compiling hello_cargo v0.1.0 (file:///projects/hello_cargo)
+    Finished dev [unoptimized + debuginfo] target(s) in 2.85 secs
+hello_cargoディレクトリで実行するとビルドしてくれる。
+
+
+5.実行する
+$ ./target/debug/hello_cargo 
+これでhello,worldが出力される。
+
+
+6.cargo run
+これを使えばコンパイルと実行を一括でやってくれる。
+hello_cargo % cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.02s
+     Running `target/debug/hello_cargo`
+Hello, world!
+
+7.cargo checkというコマンドでもビルドできる
